@@ -5,7 +5,11 @@ import json
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QCompleter, QGraphicsBlurEffect
 from PySide6.QtGui import QIcon, QPixmap, QMovie
-from PySide6.QtCore import Qt, QPropertyAnimation, QSize
+from PySide6.QtCore import Qt, QPropertyAnimation, QSize, QThread
+from datetime import datetime
+import threading
+import pytz
+import time
 import re
 from ui_form import Ui_MainWindow
 
@@ -14,6 +18,7 @@ class MainWindow(QMainWindow):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
         self.movie = QMovie("weather_icons/6.gif")
         blur_effect = QGraphicsBlurEffect(self)
         blur_effect.setBlurRadius(10)
@@ -36,7 +41,9 @@ class MainWindow(QMainWindow):
         self.city_list = []
 
         #On search button click, connect to self.get_weather method.
-        self.ui.searchButton.clicked.connect(self.get_weather)
+        self.ui.searchButton.clicked.connect(self.start_background_task)
+
+   
 
         #Function Call
         self.suggestions()
@@ -69,6 +76,10 @@ class MainWindow(QMainWindow):
 #                        Function to get weather infos, such as temperature, etc                                         #
 #------------------------------------------------------------------------------------------------------------------------#
 
+    def start_background_task(self):
+        '''Function to start the get_weather function in a background thread.'''
+        threading.Thread(target=self.get_weather).start()
+
     def get_weather(self):
         '''Function
             Gets the real-time weather condition of a city. From this function we'll also call 2 other functions
@@ -92,8 +103,8 @@ class MainWindow(QMainWindow):
         base_url = f"https://api.openweathermap.org/data/2.5/weather?lat={self.lat}&lon={self.lon}&appid={self.api_key}&units=metric&lang=it"
         response = requests.get(base_url)
         if response.status_code == 200:
+
             self.weather_info = response.json()
-            
             #Temp = Current temperature in celsius
             temp = self.weather_info['main']['temp'] 
 
@@ -117,7 +128,6 @@ class MainWindow(QMainWindow):
 
     def remove_hour(self, date):
         '''Function to extrapolate date only from a DATE/HOUR string format.
-
            Returns:
             date string without the hour.'''
         date = date[0:10]

@@ -143,11 +143,13 @@ class Ui_MainWindow(object):
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.day4_nine = QLabel(self.gridLayoutWidget)
         self.day4_nine.setObjectName(u"day4_nine")
+        self.day4_nine.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day4_nine, 4, 5, 1, 1)
 
         self.day4_twelve = QLabel(self.gridLayoutWidget)
         self.day4_twelve.setObjectName(u"day4_twelve")
+        self.day4_twelve.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day4_twelve, 4, 6, 1, 1)
 
@@ -164,11 +166,13 @@ class Ui_MainWindow(object):
 
         self.day2_six = QLabel(self.gridLayoutWidget)
         self.day2_six.setObjectName(u"day2_six")
+        self.day2_six.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day2_six, 2, 4, 1, 1)
 
         self.day5_three = QLabel(self.gridLayoutWidget)
         self.day5_three.setObjectName(u"day5_three")
+        self.day5_three.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day5_three, 5, 3, 1, 1)
 
@@ -181,6 +185,7 @@ class Ui_MainWindow(object):
 
         self.day3_eighteen = QLabel(self.gridLayoutWidget)
         self.day3_eighteen.setObjectName(u"day3_eighteen")
+        self.day3_eighteen.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day3_eighteen, 3, 8, 1, 1)
 
@@ -212,26 +217,31 @@ class Ui_MainWindow(object):
 
         self.day1_nine = QLabel(self.gridLayoutWidget)
         self.day1_nine.setObjectName(u"day1_nine")
+        self.day1_nine.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day1_nine, 1, 5, 1, 1)
 
         self.day1_three = QLabel(self.gridLayoutWidget)
         self.day1_three.setObjectName(u"day1_three")
+        self.day1_three.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day1_three, 1, 3, 1, 1)
 
         self.day2_three = QLabel(self.gridLayoutWidget)
         self.day2_three.setObjectName(u"day2_three")
+        self.day2_three.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day2_three, 2, 3, 1, 1)
 
         self.day4_eighteen = QLabel(self.gridLayoutWidget)
         self.day4_eighteen.setObjectName(u"day4_eighteen")
+        self.day4_eighteen.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day4_eighteen, 4, 8, 1, 1)
 
         self.day2_midnight = QLabel(self.gridLayoutWidget)
         self.day2_midnight.setObjectName(u"day2_midnight")
+        self.day2_midnight.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day2_midnight, 2, 2, 1, 1)
 
@@ -244,6 +254,7 @@ class Ui_MainWindow(object):
 
         self.day5_twelve = QLabel(self.gridLayoutWidget)
         self.day5_twelve.setObjectName(u"day5_twelve")
+        self.day5_twelve.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day5_twelve, 5, 6, 1, 1)
 
@@ -256,51 +267,61 @@ class Ui_MainWindow(object):
 
         self.day2_twelve = QLabel(self.gridLayoutWidget)
         self.day2_twelve.setObjectName(u"day2_twelve")
+        self.day2_twelve.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day2_twelve, 2, 6, 1, 1)
 
         self.day4_twentyone = QLabel(self.gridLayoutWidget)
         self.day4_twentyone.setObjectName(u"day4_twentyone")
+        self.day4_twentyone.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day4_twentyone, 4, 9, 1, 1)
 
         self.day4_three = QLabel(self.gridLayoutWidget)
         self.day4_three.setObjectName(u"day4_three")
+        self.day4_three.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day4_three, 4, 3, 1, 1)
 
         self.day1_twentyone = QLabel(self.gridLayoutWidget)
         self.day1_twentyone.setObjectName(u"day1_twentyone")
+        self.day1_twentyone.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day1_twentyone, 1, 9, 1, 1)
 
         self.day5_fifteen = QLabel(self.gridLayoutWidget)
         self.day5_fifteen.setObjectName(u"day5_fifteen")
+        self.day5_fifteen.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day5_fifteen, 5, 7, 1, 1)
 
         self.day2_eighteen = QLabel(self.gridLayoutWidget)
         self.day2_eighteen.setObjectName(u"day2_eighteen")
+        self.day2_eighteen.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day2_eighteen, 2, 8, 1, 1)
 
         self.day3_nine = QLabel(self.gridLayoutWidget)
         self.day3_nine.setObjectName(u"day3_nine")
+        self.day3_nine.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day3_nine, 3, 5, 1, 1)
 
         self.day3_twelve = QLabel(self.gridLayoutWidget)
         self.day3_twelve.setObjectName(u"day3_twelve")
+        self.day3_twelve.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day3_twelve, 3, 6, 1, 1)
 
         self.day4_fifteen = QLabel(self.gridLayoutWidget)
         self.day4_fifteen.setObjectName(u"day4_fifteen")
+        self.day4_fifteen.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day4_fifteen, 4, 7, 1, 1)
 
         self.day1_twelve = QLabel(self.gridLayoutWidget)
         self.day1_twelve.setObjectName(u"day1_twelve")
+        self.day1_twelve.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day1_twelve, 1, 6, 1, 1)
 
@@ -313,11 +334,13 @@ class Ui_MainWindow(object):
 
         self.day5_six = QLabel(self.gridLayoutWidget)
         self.day5_six.setObjectName(u"day5_six")
+        self.day5_six.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day5_six, 5, 4, 1, 1)
 
         self.day3_fifteen = QLabel(self.gridLayoutWidget)
         self.day3_fifteen.setObjectName(u"day3_fifteen")
+        self.day3_fifteen.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day3_fifteen, 3, 7, 1, 1)
 
@@ -330,6 +353,7 @@ class Ui_MainWindow(object):
 
         self.day3_twentyone = QLabel(self.gridLayoutWidget)
         self.day3_twentyone.setObjectName(u"day3_twentyone")
+        self.day3_twentyone.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day3_twentyone, 3, 9, 1, 1)
 
@@ -342,36 +366,43 @@ class Ui_MainWindow(object):
 
         self.day1_six = QLabel(self.gridLayoutWidget)
         self.day1_six.setObjectName(u"day1_six")
+        self.day1_six.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day1_six, 1, 4, 1, 1)
 
         self.day4_midnight = QLabel(self.gridLayoutWidget)
         self.day4_midnight.setObjectName(u"day4_midnight")
+        self.day4_midnight.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day4_midnight, 4, 2, 1, 1)
 
         self.day5_twentyone = QLabel(self.gridLayoutWidget)
         self.day5_twentyone.setObjectName(u"day5_twentyone")
+        self.day5_twentyone.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day5_twentyone, 5, 9, 1, 1)
 
         self.day3_midnight = QLabel(self.gridLayoutWidget)
         self.day3_midnight.setObjectName(u"day3_midnight")
+        self.day3_midnight.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day3_midnight, 3, 2, 1, 1)
 
         self.day5_eighteen = QLabel(self.gridLayoutWidget)
         self.day5_eighteen.setObjectName(u"day5_eighteen")
+        self.day5_eighteen.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day5_eighteen, 5, 8, 1, 1)
 
         self.day4_six = QLabel(self.gridLayoutWidget)
         self.day4_six.setObjectName(u"day4_six")
+        self.day4_six.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day4_six, 4, 4, 1, 1)
 
         self.day5_midnight = QLabel(self.gridLayoutWidget)
         self.day5_midnight.setObjectName(u"day5_midnight")
+        self.day5_midnight.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day5_midnight, 5, 2, 1, 1)
 
@@ -389,6 +420,7 @@ class Ui_MainWindow(object):
 
         self.day3_three = QLabel(self.gridLayoutWidget)
         self.day3_three.setObjectName(u"day3_three")
+        self.day3_three.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day3_three, 3, 3, 1, 1)
 
@@ -402,36 +434,43 @@ class Ui_MainWindow(object):
         self.day1_midnight = QLabel(self.gridLayoutWidget)
         self.day1_midnight.setObjectName(u"day1_midnight")
         self.day1_midnight.setStyleSheet(u"")
+        self.day1_midnight.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day1_midnight, 1, 2, 1, 1)
 
         self.day2_fifteen = QLabel(self.gridLayoutWidget)
         self.day2_fifteen.setObjectName(u"day2_fifteen")
+        self.day2_fifteen.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day2_fifteen, 2, 7, 1, 1)
 
         self.day2_twentyone = QLabel(self.gridLayoutWidget)
         self.day2_twentyone.setObjectName(u"day2_twentyone")
+        self.day2_twentyone.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day2_twentyone, 2, 9, 1, 1)
 
         self.day3_six = QLabel(self.gridLayoutWidget)
         self.day3_six.setObjectName(u"day3_six")
+        self.day3_six.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day3_six, 3, 4, 1, 1)
 
         self.day5_nine = QLabel(self.gridLayoutWidget)
         self.day5_nine.setObjectName(u"day5_nine")
+        self.day5_nine.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day5_nine, 5, 5, 1, 1)
 
         self.day1_fifteen = QLabel(self.gridLayoutWidget)
         self.day1_fifteen.setObjectName(u"day1_fifteen")
+        self.day1_fifteen.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day1_fifteen, 1, 7, 1, 1)
 
         self.day2_nine = QLabel(self.gridLayoutWidget)
         self.day2_nine.setObjectName(u"day2_nine")
+        self.day2_nine.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day2_nine, 2, 5, 1, 1)
 
@@ -451,6 +490,7 @@ class Ui_MainWindow(object):
 
         self.day1_eighteen = QLabel(self.gridLayoutWidget)
         self.day1_eighteen.setObjectName(u"day1_eighteen")
+        self.day1_eighteen.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.day1_eighteen, 1, 8, 1, 1)
 
