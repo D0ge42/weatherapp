@@ -6,12 +6,7 @@ import json
 from PySide6.QtWidgets import QApplication, QMainWindow, QCompleter
 from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtCore import Qt
-
-
-# Important:
-# You need to run the following command to generate the ui_form.py file
-#     pyside6-uic form.ui -o ui_form.py, or
-#     pyside2-uic form.ui -o ui_form.py
+import re
 from ui_form import Ui_MainWindow
 
 class MainWindow(QMainWindow):
@@ -22,60 +17,22 @@ class MainWindow(QMainWindow):
 #------------------------------------------------------------------------------------------------------------------------#
 #                                                General  setup                                                          #
 #------------------------------------------------------------------------------------------------------------------------#
-
         #Api key
         self.api_key = "0431196d6053b7ab1d5b34e45da76d05"
+
+        #Some variables initialization.
         self.lat_lon = None
         self.lat = None
         self.icon = None
         self.lon = None
-        #Pixmaps to hold weather's icon forecast
-        self.pixmap_day1_midnight = QPixmap()
-        self.pixmap_day1_three = QPixmap()
-        self.pixmap_day1_six = QPixmap()
-        self.pixmap_day1_nine = QPixmap()
-        self.pixmap_day1_twelve = QPixmap()
-        self.pixmap_day1_fifteen = QPixmap()
-        self.pixmap_day1_eighteen = QPixmap()
-        self.pixmap_day1_twentyone = QPixmap()
-        self.pixmap_day1_midnight = QPixmap()
-        self.pixmap_day2_three = QPixmap()
-        self.pixmap_day2_six = QPixmap()
-        self.pixmap_day2_nine = QPixmap()
-        self.pixmap_day2_twelve = QPixmap()
-        self.pixmap_day2_fifteen = QPixmap()
-        self.pixmap_day2_eighteen = QPixmap()
-        self.pixmap_day2_twentyone = QPixmap()
-        self.pixmap_day3_midnight = QPixmap()
-        self.pixmap_day3_three = QPixmap()
-        self.pixmap_day3_six = QPixmap()
-        self.pixmap_day3_nine = QPixmap()
-        self.pixmap_day3_twelve = QPixmap()
-        self.pixmap_day3_fifteen = QPixmap()
-        self.pixmap_day3_eighteen = QPixmap()
-        self.pixmap_day3_twentyone = QPixmap()
-        self.pixmap_day4_midnight = QPixmap()
-        self.pixmap_day4_three = QPixmap()
-        self.pixmap_day4_six = QPixmap()
-        self.pixmap_day4_nine = QPixmap()
-        self.pixmap_day4_twelve = QPixmap()
-        self.pixmap_day4_fifteen = QPixmap()
-        self.pixmap_day4_eighteen = QPixmap()
-        self.pixmap_day4_twentyone = QPixmap()
-        self.pixmap_day5_midnight = QPixmap()
-        self.pixmap_day5_three = QPixmap()
-        self.pixmap_day5_six = QPixmap()
-        self.pixmap_day5_nine = QPixmap()
-        self.pixmap_day5_twelve = QPixmap()
-        self.pixmap_day5_fifteen = QPixmap()
-        self.pixmap_day5_eighteen = QPixmap()
-        self.pixmap_day5_twentyone = QPixmap()
 
-
+        #City list initialization. We'll need this for the auto-completer.
         self.city_list = []
 
         #On search button click, connect to self.get_weather method.
         self.ui.searchButton.clicked.connect(self.get_weather)
+
+        #Function Call
         self.suggestions()
 
 #------------------------------------------------------------------------------------------------------------------------#
@@ -83,28 +40,40 @@ class MainWindow(QMainWindow):
 #------------------------------------------------------------------------------------------------------------------------#
 
     def suggestions(self):
-        self.city_name = self.ui.lineEdit.text()
+        ''' Function that will fill the previously created list with City and country name.
+            That list will be used for the auto-completer that will pop when something is being typed inside the search field'''
+        
+        #Open json file and load data inside the list.
         with open('city.list.json', 'r') as file:
             data = json.load(file)
-        
-        for città in data:
-            self.city_list.append(città['name'])
 
+        #For loop to extrapolate each city name and country from the list.
+        # We've to use a string cause append can't take 2 arguments and it expect a string. So tuples were not an option. 
+        for cities in data:
+            city_entry = f"{cities['name']} ({cities['country']})"
+            self.city_list.append(city_entry)
+
+        #Previously mentioned completer initialization and setup.
         completer = QCompleter(self.city_list)
         completer.setCaseSensitivity(Qt.CaseInsensitive)
         self.ui.lineEdit.setCompleter(completer)
-
-        
-
-
 
 #------------------------------------------------------------------------------------------------------------------------#
 #                  Function to get latitude and longitude. We'll need this to get weather infos                          #
 #------------------------------------------------------------------------------------------------------------------------#
 
-    #Function to get lat and lon of city. It will later be useful to get weather.
     def get_lat_lon(self):
+        '''Function to get the latitude and longitude of a certain city. Both lat and lone will be later used the get weather of cities
+
+        Returns:
+            dictionary with latitude and longitude of the requested city by the user. 
+        '''
+        #User input in the search field.
         self.city_name = self.ui.lineEdit.text()
+
+        #Truncates the city complete name. Example: From Terni (IT) to Terni. Else it won't work for the API Call.
+        self.city_name = re.sub(r"\s*\(.*\)","",self.city_name)
+
         base_url = f"http://api.openweathermap.org/geo/1.0/direct?q={self.city_name}&limit=5&appid={self.api_key}"
         response = requests.get(base_url)
         self.city_info = response.json()
@@ -120,22 +89,40 @@ class MainWindow(QMainWindow):
 #------------------------------------------------------------------------------------------------------------------------#
 
     def get_weather(self):
+        '''Function
+            Gets the real-time weather condition of a city. From this function we'll also call 2 other functions
+            self.get_weather_icon() = Function that will return a different icon based con the weather ID returned by the API.
+            self.weather_forecast() = Function that will return weather the next 5 days.'''
+        
+        #Storing latitude and longitude inside the return of the get_lat_lon() function.
         lat_lon = self.get_lat_lon()
+
+        #If the api request was successfull self.city_info will be True and we'll be able to access both lat and lon.
         if self.city_info:
             self.lat = lat_lon['lat']
             self.lon = lat_lon['lon']
         else:
             print("No city with this name")
+
+        #Base url for the API request.
         base_url = f"https://api.openweathermap.org/data/2.5/weather?lat={self.lat}&lon={self.lon}&appid={self.api_key}&units=metric&lang=it"
-        print(base_url)
         response = requests.get(base_url)
         if response.status_code == 200:
             self.weather_info = response.json()
-            temp = self.weather_info['main']['temp']
+            
+            #Temp = Current temperature in celsius
+            temp = self.weather_info['main']['temp'] 
+
+            #Name = city_name
             name = self.weather_info['name']
+
+            #Weather description
             description = self.weather_info['weather'][0]['description']
+
             self.get_weather_icon()
             self.weather_forecast()
+            
+            #Set ui elements with relative values.
             self.ui.w_desc.setText(f"{description}")
             self.ui.city_label.setText(str(name))
             self.ui.temp.setText(f"{str(temp)}°")
@@ -145,31 +132,35 @@ class MainWindow(QMainWindow):
 #------------------------------------------------------------------------------------------------------------------------#
 
     def remove_hour(self, date):
+        '''Function to extrapolate date only from a DATE/HOUR string format.
+
+           Returns:
+            date string without the hour.'''
         date = date[0:10]
         return date
     
-    def remove_date(self, hour):
-        hour = hour[12:19]
-        return hour
-
 
 #------------------------------------------------------------------------------------------------------------------------#
 #                            Function to get weather forecast from today to the next 5 days                              #
 #------------------------------------------------------------------------------------------------------------------------#
 
     def weather_forecast(self):
+        ''' Function used to get all the weather data for the next 5 days. Data will be placed inside a grid with day and hours.
+            Inside the function i've set every label with its own scaled pixmap that will displays respective weather icon for a certain day/hour.
+            '''
         base_url = f"https://api.openweathermap.org/data/2.5/forecast?lat={self.lat}&lon={self.lon}&appid={self.api_key}&units=metric&lang=it"
-        print(base_url)
         response = requests.get(base_url)
         data = response.json()
         if response.status_code == 200:
-            #Dates
+
+            #Setting ui label for each day. From current to the next 5 days.
             self.ui.Day_1.setText(self.remove_hour(data['list'][2]['dt_txt']))
             self.ui.Day_2.setText(self.remove_hour(data['list'][10]['dt_txt']))
             self.ui.Day_3.setText(self.remove_hour(data['list'][18]['dt_txt']))
             self.ui.Day_4.setText(self.remove_hour(data['list'][26]['dt_txt']))
             self.ui.Day_5.setText(self.remove_hour(data['list'][34]['dt_txt']))
-            #Hours
+
+            #Setting ui label for each hour. Will be set every 3 hour because that's what the API gave me back.
             self.ui.midnight.setText("00:00:00")
             self.ui.three.setText("00:03:00")
             self.ui.six.setText("00:06:00")
@@ -178,7 +169,8 @@ class MainWindow(QMainWindow):
             self.ui.fifteen.setText("00:15:00")
             self.ui.eighteen.setText("00:18:00")
             self.ui.twentyone.setText("00:21:00")
-            #Weather id for each date
+
+            #Retrieve and store each ID of a certain day/hour inside a variable.
             id_day1_midnight = data['list'][2]['weather'][0]['id']
             id_day1_three = data['list'][3]['weather'][0]['id']
             id_day1_six = data['list'][4]['weather'][0]['id']
@@ -217,8 +209,8 @@ class MainWindow(QMainWindow):
             id_day5_nine = data['list'][37]['weather'][0]['id']
             id_day5_twelve = data['list'][38]['weather'][0]['id']
             id_day5_fifteen = data['list'][39]['weather'][0]['id']
-            # id_day5_eighteen = data['list'][40]['weather'][0]['id']
-            # id_day5_twentyone =data['list'][41]['weather'][0]['id']
+
+        #Set every label with a scaled pixmap, done by using a function called self.id_to_icon() that will convert each id to its respective icon.
         self.pixmap_day1_midnight = QPixmap(self.id_to_icon(id_day1_midnight))
         self.scaled_pixmap_day1_midnight = self.pixmap_day1_midnight.scaled(self.ui.day1_midnight.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
         self.ui.day1_midnight.setPixmap(self.scaled_pixmap_day1_midnight)
@@ -384,6 +376,11 @@ class MainWindow(QMainWindow):
 #------------------------------------------------------------------------------------------------------------------------#
 
     def id_to_icon(self,id):
+        ''' Function that will check weather ids and retrieve corresponding png icon.
+
+        Returns:
+            Path of the icon itself as string'''
+        
         if id >= 801 and id <= 804:
             icon = "weather_icons/blue-cloud.png"
         elif id >= 200 and id <= 232:
@@ -402,7 +399,13 @@ class MainWindow(QMainWindow):
 
 
     def get_weather_icon(self):
+        ''' Very similar function to id_to_icon() but this is used for the real-time weather.
+            It also sets the label with respective icon.'''
+        
+        #This will retrieve current weather id from the API json.
         weather_id = self.weather_info['weather'][0]['id']
+
+        #Check for id and assign/set respective weather icon.
         if weather_id >= 801 and weather_id <= 804:
             self.icon = "weather_icons/blue-cloud.png"
             pixmap = QPixmap(self.icon)
@@ -442,6 +445,7 @@ class MainWindow(QMainWindow):
 #------------------------------------------------------------------------------------------------------------------------#
 #                                         Setting app-background image                                                   #
 #------------------------------------------------------------------------------------------------------------------------#
+'''Setting stylesheet. Just using this to set background-image'''
 
 stylesheet =  """MainWindow {
     background-image: url("weather_icons/sky-background-video-conferencing/4205986.jpg"); 
