@@ -3,9 +3,9 @@ import sys
 import requests
 import json
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QCompleter
-from PySide6.QtGui import QIcon, QPixmap
-from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QApplication, QMainWindow, QCompleter, QGraphicsBlurEffect
+from PySide6.QtGui import QIcon, QPixmap, QMovie
+from PySide6.QtCore import Qt, QPropertyAnimation, QSize
 import re
 from ui_form import Ui_MainWindow
 
@@ -14,6 +14,13 @@ class MainWindow(QMainWindow):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.movie = QMovie("weather_icons/6.gif")
+        blur_effect = QGraphicsBlurEffect(self)
+        blur_effect.setBlurRadius(10)
+        self.ui.animated_bg.setGraphicsEffect(blur_effect)
+        self.movie.setScaledSize(self.ui.animated_bg.size())
+        self.ui.animated_bg.setMovie(self.movie)
+        self.movie.start()
 #------------------------------------------------------------------------------------------------------------------------#
 #                                                General  setup                                                          #
 #------------------------------------------------------------------------------------------------------------------------#
@@ -21,7 +28,6 @@ class MainWindow(QMainWindow):
         self.api_key = "0431196d6053b7ab1d5b34e45da76d05"
 
         #Some variables initialization.
-        self.lat_lon = None
         self.lat = None
         self.icon = None
         self.lon = None
@@ -50,39 +56,14 @@ class MainWindow(QMainWindow):
         #For loop to extrapolate each city name and country from the list.
         # We've to use a string cause append can't take 2 arguments and it expect a string. So tuples were not an option. 
         for cities in data:
-            city_entry = f"{cities['name']} ({cities['country']})"
-            self.city_list.append(city_entry)
+                city_entry = f"{cities['name']} ({cities['country']})"
+                self.city_list.append(city_entry)
+
 
         #Previously mentioned completer initialization and setup.
         completer = QCompleter(self.city_list)
         completer.setCaseSensitivity(Qt.CaseInsensitive)
         self.ui.lineEdit.setCompleter(completer)
-
-#------------------------------------------------------------------------------------------------------------------------#
-#                  Function to get latitude and longitude. We'll need this to get weather infos                          #
-#------------------------------------------------------------------------------------------------------------------------#
-
-    def get_lat_lon(self):
-        '''Function to get the latitude and longitude of a certain city. Both lat and lone will be later used the get weather of cities
-
-        Returns:
-            dictionary with latitude and longitude of the requested city by the user. 
-        '''
-        #User input in the search field.
-        self.city_name = self.ui.lineEdit.text()
-
-        #Truncates the city complete name. Example: From Terni (IT) to Terni. Else it won't work for the API Call.
-        self.city_name = re.sub(r"\s*\(.*\)","",self.city_name)
-
-        base_url = f"http://api.openweathermap.org/geo/1.0/direct?q={self.city_name}&limit=5&appid={self.api_key}"
-        response = requests.get(base_url)
-        self.city_info = response.json()
-        if response.status_code == 200:
-            if self.city_info:       
-                self.lat_lon = {"lat": f"{self.city_info[0]['lat']}", "lon": f"{self.city_info[0]['lon']}"}
-                return self.lat_lon
-            else:
-                print("Couldn't find city")
         
 #------------------------------------------------------------------------------------------------------------------------#
 #                        Function to get weather infos, such as temperature, etc                                         #
@@ -93,16 +74,19 @@ class MainWindow(QMainWindow):
             Gets the real-time weather condition of a city. From this function we'll also call 2 other functions
             self.get_weather_icon() = Function that will return a different icon based con the weather ID returned by the API.
             self.weather_forecast() = Function that will return weather the next 5 days.'''
-        
-        #Storing latitude and longitude inside the return of the get_lat_lon() function.
-        lat_lon = self.get_lat_lon()
+        self.city_name = self.ui.lineEdit.text()
 
-        #If the api request was successfull self.city_info will be True and we'll be able to access both lat and lon.
-        if self.city_info:
-            self.lat = lat_lon['lat']
-            self.lon = lat_lon['lon']
-        else:
-            print("No city with this name")
+        #Truncates the city complete name. Example: From Terni (IT) to Terni. Else it won't work for the API Call.
+        self.city_name = re.sub(r"\s*\(.*\)","",self.city_name)
+         #Open json file and load data inside the list.
+        with open('city.list.json', 'r') as file:
+            data = json.load(file)
+
+        #Loop the json file to find the city name and its coordinates.  
+        for cities in data:
+            if cities['name'] == self.city_name:
+                self.lat = cities['coord']['lat']
+                self.lon = cities['coord']['lon']
 
         #Base url for the API request.
         base_url = f"https://api.openweathermap.org/data/2.5/weather?lat={self.lat}&lon={self.lon}&appid={self.api_key}&units=metric&lang=it"
@@ -447,16 +431,16 @@ class MainWindow(QMainWindow):
 #------------------------------------------------------------------------------------------------------------------------#
 '''Setting stylesheet. Just using this to set background-image'''
 
-stylesheet =  """MainWindow {
-    background-image: url("weather_icons/sky-background-video-conferencing/4205986.jpg"); 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    }
-    """
+# stylesheet =  """MainWindow {
+#     background-image: url("weather_icons/sky-background-video-conferencing/4205986.jpg"); 
+#     background-repeat: no-repeat; 
+#     background-position: center; 
+#     }
+#     """
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setStyleSheet(stylesheet)
+    # app.setStyleSheet(stylesheet)
     widget = MainWindow()
     widget.show()
     sys.exit(app.exec())
