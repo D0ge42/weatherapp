@@ -79,36 +79,9 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
 
-        self.w_desc = QLabel(self.widget)
-        self.w_desc.setObjectName(u"w_desc")
-        self.w_desc.setGeometry(QRect(390, 60, 320, 30))
-        self.w_desc.setMaximumSize(QSize(750, 50))
-        font = QFont()
-        font.setFamilies([u"Ubuntu"])
-        font.setPointSize(19)
-        font.setBold(False)
-        font.setItalic(False)
-        self.w_desc.setFont(font)
-        self.w_desc.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
-"color: rgb(255, 255, 255);")
-        self.city_label = QLabel(self.widget)
-        self.city_label.setObjectName(u"city_label")
-        self.city_label.setGeometry(QRect(30, 0, 741, 50))
-        sizePolicy.setHeightForWidth(self.city_label.sizePolicy().hasHeightForWidth())
-        self.city_label.setSizePolicy(sizePolicy)
-        self.city_label.setMaximumSize(QSize(750, 50))
-        font1 = QFont()
-        font1.setFamilies([u"Titillium Web"])
-        font1.setPointSize(19)
-        font1.setBold(True)
-        self.city_label.setFont(font1)
-        self.city_label.setLayoutDirection(Qt.LeftToRight)
-        self.city_label.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
-"color: rgb(255, 255, 255);")
-        self.city_label.setAlignment(Qt.AlignCenter)
         self.w_icon = QLabel(self.widget)
         self.w_icon.setObjectName(u"w_icon")
-        self.w_icon.setGeometry(QRect(260, 50, 50, 50))
+        self.w_icon.setGeometry(QRect(230, 50, 50, 50))
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
@@ -119,17 +92,22 @@ class Ui_MainWindow(object):
 "color: rgb(0, 0, 0);")
         self.temp = QLabel(self.widget)
         self.temp.setObjectName(u"temp")
-        self.temp.setGeometry(QRect(310, 60, 80, 30))
+        self.temp.setGeometry(QRect(290, 60, 500, 30))
         sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
         sizePolicy2.setHeightForWidth(self.temp.sizePolicy().hasHeightForWidth())
         self.temp.setSizePolicy(sizePolicy2)
-        self.temp.setMaximumSize(QSize(80, 30))
+        self.temp.setMaximumSize(QSize(500, 30))
+        font = QFont()
+        font.setFamilies([u"Ubuntu"])
+        font.setPointSize(19)
+        font.setBold(False)
+        font.setItalic(False)
         self.temp.setFont(font)
         self.temp.setStyleSheet(u"background-color: rgba(0, 0, 0, 0);\n"
 "color: rgb(255, 255, 255);")
-        self.temp.setAlignment(Qt.AlignCenter)
+        self.temp.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.temp.setMargin(0)
         self.widget_2 = QWidget(self.widget)
         self.widget_2.setObjectName(u"widget_2")
@@ -155,11 +133,11 @@ class Ui_MainWindow(object):
 
         self.Day_3 = QLabel(self.gridLayoutWidget)
         self.Day_3.setObjectName(u"Day_3")
-        font2 = QFont()
-        font2.setFamilies([u"URW Gothic"])
-        font2.setPointSize(13)
-        font2.setBold(False)
-        self.Day_3.setFont(font2)
+        font1 = QFont()
+        font1.setFamilies([u"URW Gothic"])
+        font1.setPointSize(13)
+        font1.setBold(False)
+        self.Day_3.setFont(font1)
         self.Day_3.setStyleSheet(u"color: rgb(246, 245, 244);")
 
         self.gridLayout.addWidget(self.Day_3, 3, 0, 1, 1)
@@ -178,7 +156,7 @@ class Ui_MainWindow(object):
 
         self.Day_1 = QLabel(self.gridLayoutWidget)
         self.Day_1.setObjectName(u"Day_1")
-        self.Day_1.setFont(font2)
+        self.Day_1.setFont(font1)
         self.Day_1.setStyleSheet(u"color: rgb(246, 245, 244);")
 
         self.gridLayout.addWidget(self.Day_1, 1, 0, 1, 1)
@@ -191,26 +169,26 @@ class Ui_MainWindow(object):
 
         self.twelve = QLabel(self.gridLayoutWidget)
         self.twelve.setObjectName(u"twelve")
-        font3 = QFont()
-        font3.setFamilies([u"URW Gothic"])
-        font3.setPointSize(13)
-        font3.setBold(False)
-        font3.setItalic(False)
-        self.twelve.setFont(font3)
+        font2 = QFont()
+        font2.setFamilies([u"URW Gothic"])
+        font2.setPointSize(13)
+        font2.setBold(False)
+        font2.setItalic(False)
+        self.twelve.setFont(font2)
         self.twelve.setStyleSheet(u"color: rgb(246, 245, 244);")
 
         self.gridLayout.addWidget(self.twelve, 0, 6, 1, 1)
 
         self.twentyone = QLabel(self.gridLayoutWidget)
         self.twentyone.setObjectName(u"twentyone")
-        self.twentyone.setFont(font3)
+        self.twentyone.setFont(font2)
         self.twentyone.setStyleSheet(u"color: rgb(246, 245, 244);")
 
         self.gridLayout.addWidget(self.twentyone, 0, 9, 1, 1)
 
         self.Day_4 = QLabel(self.gridLayoutWidget)
         self.Day_4.setObjectName(u"Day_4")
-        self.Day_4.setFont(font2)
+        self.Day_4.setFont(font1)
         self.Day_4.setStyleSheet(u"color: rgb(246, 245, 244);")
 
         self.gridLayout.addWidget(self.Day_4, 4, 0, 1, 1)
@@ -247,7 +225,7 @@ class Ui_MainWindow(object):
 
         self.Day_5 = QLabel(self.gridLayoutWidget)
         self.Day_5.setObjectName(u"Day_5")
-        self.Day_5.setFont(font2)
+        self.Day_5.setFont(font1)
         self.Day_5.setStyleSheet(u"color: rgb(246, 245, 244);")
 
         self.gridLayout.addWidget(self.Day_5, 5, 0, 1, 1)
@@ -260,7 +238,7 @@ class Ui_MainWindow(object):
 
         self.three = QLabel(self.gridLayoutWidget)
         self.three.setObjectName(u"three")
-        self.three.setFont(font3)
+        self.three.setFont(font2)
         self.three.setStyleSheet(u"color: rgb(246, 245, 244);")
 
         self.gridLayout.addWidget(self.three, 0, 3, 1, 1)
@@ -327,7 +305,7 @@ class Ui_MainWindow(object):
 
         self.eighteen = QLabel(self.gridLayoutWidget)
         self.eighteen.setObjectName(u"eighteen")
-        self.eighteen.setFont(font3)
+        self.eighteen.setFont(font2)
         self.eighteen.setStyleSheet(u"color: rgb(246, 245, 244);")
 
         self.gridLayout.addWidget(self.eighteen, 0, 8, 1, 1)
@@ -346,7 +324,7 @@ class Ui_MainWindow(object):
 
         self.six = QLabel(self.gridLayoutWidget)
         self.six.setObjectName(u"six")
-        self.six.setFont(font3)
+        self.six.setFont(font2)
         self.six.setStyleSheet(u"color: rgb(246, 245, 244);")
 
         self.gridLayout.addWidget(self.six, 0, 4, 1, 1)
@@ -359,7 +337,7 @@ class Ui_MainWindow(object):
 
         self.fifteen = QLabel(self.gridLayoutWidget)
         self.fifteen.setObjectName(u"fifteen")
-        self.fifteen.setFont(font3)
+        self.fifteen.setFont(font2)
         self.fifteen.setStyleSheet(u"color: rgb(246, 245, 244);")
 
         self.gridLayout.addWidget(self.fifteen, 0, 7, 1, 1)
@@ -413,7 +391,7 @@ class Ui_MainWindow(object):
 
         self.nine = QLabel(self.gridLayoutWidget)
         self.nine.setObjectName(u"nine")
-        self.nine.setFont(font3)
+        self.nine.setFont(font2)
         self.nine.setStyleSheet(u"color: rgb(246, 245, 244);")
 
         self.gridLayout.addWidget(self.nine, 0, 5, 1, 1)
@@ -426,7 +404,7 @@ class Ui_MainWindow(object):
 
         self.Day_2 = QLabel(self.gridLayoutWidget)
         self.Day_2.setObjectName(u"Day_2")
-        self.Day_2.setFont(font2)
+        self.Day_2.setFont(font1)
         self.Day_2.setStyleSheet(u"color: rgb(246, 245, 244);")
 
         self.gridLayout.addWidget(self.Day_2, 2, 0, 1, 1)
@@ -476,13 +454,13 @@ class Ui_MainWindow(object):
 
         self.midnight = QLabel(self.gridLayoutWidget)
         self.midnight.setObjectName(u"midnight")
-        font4 = QFont()
-        font4.setFamilies([u"URW Gothic"])
-        font4.setPointSize(13)
-        font4.setBold(False)
-        font4.setItalic(False)
-        font4.setKerning(True)
-        self.midnight.setFont(font4)
+        font3 = QFont()
+        font3.setFamilies([u"URW Gothic"])
+        font3.setPointSize(13)
+        font3.setBold(False)
+        font3.setItalic(False)
+        font3.setKerning(True)
+        self.midnight.setFont(font3)
         self.midnight.setToolTipDuration(-1)
         self.midnight.setStyleSheet(u"color: rgb(246, 245, 244);")
 
@@ -497,13 +475,30 @@ class Ui_MainWindow(object):
         self.animated_bg = QLabel(self.widget)
         self.animated_bg.setObjectName(u"animated_bg")
         self.animated_bg.setGeometry(QRect(-20, 0, 821, 621))
+        self.city_label = QLabel(self.widget)
+        self.city_label.setObjectName(u"city_label")
+        self.city_label.setGeometry(QRect(0, 0, 791, 39))
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.city_label.sizePolicy().hasHeightForWidth())
+        self.city_label.setSizePolicy(sizePolicy3)
+        self.city_label.setMaximumSize(QSize(800, 50))
+        font4 = QFont()
+        font4.setFamilies([u"URW Gothic [UKWN]"])
+        font4.setPointSize(19)
+        font4.setBold(False)
+        font4.setItalic(True)
+        self.city_label.setFont(font4)
+        self.city_label.setLayoutDirection(Qt.LeftToRight)
+        self.city_label.setStyleSheet(u"color: rgb(246, 211, 45);")
+        self.city_label.setAlignment(Qt.AlignCenter)
         self.animated_bg.raise_()
         self.verticalLayoutWidget_2.raise_()
-        self.w_desc.raise_()
-        self.city_label.raise_()
         self.w_icon.raise_()
         self.temp.raise_()
         self.widget_2.raise_()
+        self.city_label.raise_()
 
         self.verticalLayout.addWidget(self.widget)
 
@@ -518,8 +513,6 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Search a city..", None))
         self.searchButton.setText(QCoreApplication.translate("MainWindow", u"Search", None))
-        self.w_desc.setText("")
-        self.city_label.setText("")
         self.w_icon.setText("")
         self.temp.setText("")
         self.day4_nine.setText("")
@@ -580,5 +573,6 @@ class Ui_MainWindow(object):
         self.midnight.setText("")
         self.day1_eighteen.setText("")
         self.animated_bg.setText("")
+        self.city_label.setText("")
     # retranslateUi
 
